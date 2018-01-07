@@ -1,0 +1,18 @@
+version: "2"
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=artistsubscription
+    ports:
+      - "5435:5432"
+  artistsubscription-service:
+    #image: g-test
+    image: blajan/artist_subscription-api
+    environment:
+      - KUMULUZEE_DATASOURCES0_CONNECTIONURL=jdbc:postgresql://postgres:5432/artistsubscription
+    ports:
+      - "8085:8085"
+    depends_on:
+      - postgres
