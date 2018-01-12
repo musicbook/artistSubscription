@@ -33,9 +33,9 @@ spec:
         - containerPort: 8085
           name: server
           protocol: TCP
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8085
-          initialDelaySeconds: 25
-        periodSeconds: 5
+#        livenessProbe:
+#          httpGet:
+#            path: /health
+#            port: 8085
+#          initialDelaySeconds: 25
+#        periodSeconds: 5
