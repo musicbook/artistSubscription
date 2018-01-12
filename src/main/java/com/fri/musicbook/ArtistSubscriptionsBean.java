@@ -1,9 +1,14 @@
 package com.fri.musicbook;
 
-import com.kumuluz.ee.fault.tolerance.annotations.*;
+import com.kumuluz.ee.fault.tolerance.annotations.CommandKey;
+import com.kumuluz.ee.fault.tolerance.annotations.GroupKey;
 import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
+import org.eclipse.microprofile.faulttolerance.Bulkhead;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -31,7 +36,7 @@ public class ArtistSubscriptionsBean {
         return query.getResultList();
     }
 
-    @Log
+    //@Log
     public List<ArtistSubscription> findArtistSubscriptionsFallback() {
 
         //log.info("Fallback called for findOrdersByCustomerId.");
