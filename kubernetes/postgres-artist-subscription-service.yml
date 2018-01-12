@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-artist-subscription
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5437 #<-na vem
+    protocol: TCP
+    targetPort: 5432 #<-original
+  selector:
+    app: postgres-artist-subscription
