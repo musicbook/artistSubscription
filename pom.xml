@@ -76,8 +76,7 @@
             <artifactId>kumuluzee-metrics-core</artifactId>
             <version>${kumuluzee-metrics.version}</version>
         </dependency>
-
-        <!--        <dependency>
+        <dependency>
             <groupId>com.kumuluz.ee.config</groupId>
             <artifactId>kumuluzee-config-etcd</artifactId>
             <version>${kumuluzee-config.version}</version>
@@ -87,8 +86,7 @@
             <artifactId>kumuluzee-discovery-etcd</artifactId>
             <version>${kumuluzee-discovery.version}</version>
         </dependency>
- -->   </dependencies>
-
+   </dependencies>
     <build>
         <plugins>
             <plugin>

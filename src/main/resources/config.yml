@@ -14,9 +14,9 @@ kumuluzee:
       password: postgres
       max-pool-size: 20
   health:
-      servlet:
-        mapping: /health
-        enabled: true
+     # servlet:
+     #   mapping: /health
+     #   enabled: true
       checks:
         data-source-health-check:
           jndi-name: jdbc/ArtistSubscriptionsDS

@@ -20,7 +20,7 @@ spec:
           - name: KUMULUZEE_CONFIG_ETCD_HOSTS
             value: http://etcd:2379
           - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
-            value: jdbc:postgresql://postgres-artist-subscription:5437/artist-subscription
+            value: jdbc:postgresql://postgres-artist-subscription:5437/artistsubscription
           - name: KUMULUZEE_DATASOURCES0_USERNAME
             value: userdb
           - name: KUMULUZEE_DATASOURCES0_PASSWORD
@@ -33,3 +33,9 @@ spec:
         - containerPort: 8085
           name: server
           protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8085
+          initialDelaySeconds: 25
+        periodSeconds: 5
