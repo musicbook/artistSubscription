@@ -26,6 +26,28 @@ kumuluzee:
           url-pattern: /metrics/*
         - name: artistSubscriptionsEndpoint
           url-pattern: /v1/artistSubscriptions/*
+  logs:
+      config-file:
+        '<?xml version="1.0" encoding="UTF-8"?>
+         <Configuration name="genreSubscription-logging">
+             <Appenders>
+                 <Console name="console" target="SYSTEM_OUT">
+                     <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
+                 </Console>
+                 <!-- A socket definition for sending logs into Logstash using TCP and JSON format.
+            moj logit     <Socket name="logstash" host="8fe6cf20-0ea6-459f-a074-85522fc8b44f-ls.logit.io" port="14691" protocol="tcp">-->
+                    <Socket name="logstash" host="45b3a890-bc4a-4fa6-b1b0-74ff1f25736c-ls.logit.io" port="14448" protocol="tcp">
+                    <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
+                 </Socket>
+             </Appenders>
+             <Loggers>
+                 <!-- Default logger -->
+                 <Root level="trace">
+                     <AppenderRef ref="console"/>
+                     <AppenderRef ref="logstash"/>
+                 </Root>
+             </Loggers>
+         </Configuration>'
 #  config:
 #    etcd:
 #      hosts: http://192.168.99.100:2379

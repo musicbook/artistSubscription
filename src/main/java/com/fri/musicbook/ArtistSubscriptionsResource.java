@@ -1,5 +1,7 @@
 package com.fri.musicbook;
 
+import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.logs.cdi.LogParams;
 import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @Path("/artistSubscription")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Log(LogParams.METRICS)
 public class ArtistSubscriptionsResource {
     @Context
     protected UriInfo uriInfo;
