@@ -25,17 +25,17 @@ spec:
             value: userdb
           - name: KUMULUZEE_DATASOURCES0_PASSWORD
             value: postgres
-#          - name: KUMULUZEE_SERVER_BASEURL
-#            value: http://169.51.16.117:32289
+          - name: KUMULUZEE_SERVER_BASEURL
+            value: http://169.51.16.117:30893
           - name: KUMULUZEE_VERSION
             value: 1.0.1
         ports:
         - containerPort: 8085
           name: server
           protocol: TCP
-#        livenessProbe:
-#          httpGet:
-#            path: /health
-#            port: 8085
-#          initialDelaySeconds: 25
-#        periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8085
+          initialDelaySeconds: 35
+          periodSeconds: 5
