@@ -17,12 +17,12 @@ public class ArtistSubscriptionsHealthCheckBean implements HealthCheck{
     @Inject
     @DiscoverService("artist-service")
     private String basePath;
-    private static final String url = "http://localhost:8085/v1/artistSubscription";
+    private static final String url = "http://169.51.16.117:30893/v1/artistSubscription";
 
     @Override
     public HealthCheckResponse call() {
         try {
-            System.out.println(basePath);
+            System.out.println("kajeto:"+basePath);
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("HEAD");
 
