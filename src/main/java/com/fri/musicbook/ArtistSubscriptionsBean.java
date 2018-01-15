@@ -5,7 +5,10 @@ import com.kumuluz.ee.fault.tolerance.annotations.GroupKey;
 import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
-
+import org.eclipse.microprofile.faulttolerance.Bulkhead;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -18,16 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequestScoped
-//@Bulkhead
-//@GroupKey("artistsubscription")
+@Bulkhead
+@GroupKey("artistsubscription")
 public class ArtistSubscriptionsBean {
     @PersistenceContext(unitName = "artistsubscriptions-jpa")
     private EntityManager em;
 
-  //  @CircuitBreaker
-   // @Fallback(fallbackMethod = "findArtistSubscriptionsFallback")
-   // @CommandKey("http-get-artistsubs")
-   // @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @CircuitBreaker
+    @Fallback(fallbackMethod = "findArtistSubscriptionsFallback")
+    @CommandKey("http-get-artistsubs")
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
     public List<ArtistSubscription> getArtistSubscriptions(){
         Query query = em.createNamedQuery("ArtistSubscription.getAll", ArtistSubscription.class);
         return query.getResultList();
@@ -57,10 +60,10 @@ public class ArtistSubscriptionsBean {
         return gs;
     }
 
- //   @CircuitBreaker
- //   @Fallback(fallbackMethod = "findArtistSubscriptionsFallback")
- //   @CommandKey("http-get-artistsubs-filtered")
- //   @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @CircuitBreaker
+    @Fallback(fallbackMethod = "findArtistSubscriptionsFallback")
+    @CommandKey("http-get-artistsubs-filtered")
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
     public List<ArtistSubscription> getArtistSubscriptionsFilter(UriInfo uriInfo) {
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
                 .build();
